@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import superagent from 'superagent';
 import { formatWeatherData } from '../helpers/formatWeatherData';
+import LocationDataDisplay from './LocationDataDisplay';
 
 const WeatherContainer = () => {
   const [weatherData, setWeatherData] = useState('');
@@ -20,18 +21,10 @@ const WeatherContainer = () => {
 
   return (
     <div>
-      { weatherData.locationData && (
-        <div key='location'>
-          <h3>{weatherData.locationData.name}</h3>
-          <h3>{weatherData.locationData.region }</h3>
-        </div>
-      )}
+      { weatherData.locationData && <LocationDataDisplay location={weatherData.locationData }/>}
     </div>
   );
 };
 
 export default WeatherContainer;
-
-
-
 
