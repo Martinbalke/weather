@@ -1,8 +1,8 @@
- export const formatWeatherData = (weatherData) => {
+export const formatWeatherData = (weatherData) => {
   const formattedWeatherData = {};
   formattedWeatherData.locationData = formatLocationData(weatherData)
   formattedWeatherData.forcastData = formatForcastData(weatherData)
-  return formatForcastData
+  return formattedWeatherData;
 }
 
 const formatLocationData = ({location, current}) => {
@@ -11,11 +11,11 @@ const formatLocationData = ({location, current}) => {
   return { name, region, country, time, temp, icon, text};
 }
 
-const formatForcastData = ({ forecast}) => {
+const formatForcastData = ({ forecast }) => {
   const formattedForcastData = [];
   const { forecastday } = forecast;
   forecastday.forEach(dayData => {
-    formatForcastData.push({
+    formattedForcastData.push({
 			date: dayData.date,
 			high: dayData.day.maxtemp_f,
 			low: dayData.day.mintemp_f,
