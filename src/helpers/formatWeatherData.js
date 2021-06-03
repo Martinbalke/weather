@@ -1,7 +1,7 @@
 export const formatWeatherData = (weatherData) => {
   const formattedWeatherData = {};
   formattedWeatherData.locationData = formatLocationData(weatherData)
-  formattedWeatherData.forcastData = formatForcastData(weatherData)
+  formattedWeatherData.forecastData = formatForcastData(weatherData)
   return formattedWeatherData;
 }
 

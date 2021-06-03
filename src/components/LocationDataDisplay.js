@@ -10,15 +10,19 @@ const LocationDataDisplay = ({ location: {
   text,
 } }) => {
 	return (
-		<div key='location'>
-			<h3>{name}</h3>
-      <h3>{region}</h3>
-      <p>{ country}</p>
-      <p>{ time}</p>
-      <p>{temp}</p>
-      <p>{text}</p>
-      
-      <img src={icon} alt='Weather description icon'/>
+		<div className='' style={{ display: 'flex' }}>
+			<div className='' style={{ margin: '1rem' }}>
+				<h3 style={{ margin: '1rem' }}>{name}</h3>
+				<h3 style={{ margin: '1rem' }}>{region}</h3>
+			</div>
+
+			<div className='' style={{ display: 'flex', flexDirection: 'column' }}>
+				<p>{time}</p>
+				<p>{temp}</p>
+				<p>{text}</p>
+
+				<img src={icon} alt='Weather description icon' />
+			</div>
 		</div>
 	);
 };
