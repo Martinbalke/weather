@@ -10,11 +10,15 @@ const WeatherContainer = () => {
   const inputRef = useRef(false);
   
   useEffect(() => {
-    window.addEventListener('click', e => {
-      if (e.target !== inputRef.current) {inputRef.current.value = weatherData.locationData.name}
-     })
-
-  })
+    function handleClickOutside(e) {
+      if (e.target !== inputRef.current && weatherData.locationData.name) {
+        inputRef.current.value = weatherData.locationData.name;
+      }
+    }
+    window.addEventListener('click', handleClickOutside);
+    
+    return () => window.removeEventListener('click',handleClickOutside);
+	});
 
 	useEffect(() => {
 		async function getWeatherData() {
