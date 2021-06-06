@@ -47,8 +47,6 @@ const WeatherContainer = () => {
 
 	return (
     <div style={{ width: '50%' }}>
-      <p>{ location}</p>
-      <p>{ favorites}</p>
 			<input
 				type='text'
 				onKeyUp={(e) => setLocation(() => e.target.value)}
