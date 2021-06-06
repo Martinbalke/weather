@@ -3,10 +3,12 @@ import superagent from 'superagent';
 import { formatWeatherData } from '../helpers/formatWeatherData';
 import LocationDataDisplay from './LocationDataDisplay';
 import ForecastDataDisplay from './ForecastDataDisplay';
+import FavoritesDisplay from './FavoritesDisplay'
 
 const WeatherContainer = () => {
 	const [weatherData, setWeatherData] = useState('');
 	const [location, setLocation] = useState('Seattle');
+  const [favorites, setFavorites] = useState(window.localStorage.getItem('weatherFavorites') || []);
   const inputRef = useRef(false);
   
   useEffect(() => {
@@ -37,15 +39,26 @@ const WeatherContainer = () => {
 		getWeatherData();
 	}, [location]);
 
+  function handleFavorites(action, data) {
+    if (action === 'add') setFavorites(favorites => [data, ...favorites]) ;
+    if (action === 'remove') setFavorites(favorites => [...favorites].filter(favorite => favorite !== data))
+    window.localStorage.setItem('weatherFavorites', favorites);
+  }
+
 	return (
-		<div style={{ width: '50%' }}>
+    <div style={{ width: '50%' }}>
+      <p>{ location}</p>
+      <p>{ favorites}</p>
 			<input
 				type='text'
 				onKeyUp={(e) => setLocation(() => e.target.value)}
 				ref={inputRef}
 			/>
 			{weatherData.locationData && (
-				<LocationDataDisplay location={weatherData.locationData} />
+				<div>
+          <LocationDataDisplay location={weatherData.locationData} />
+          <input type="button" defaultValue='+' onClick={ () => handleFavorites('add',location ) }/>
+				</div>
 			)}
 			<div className='' style={{ display: 'flex' }}>
 				{weatherData.forecastData &&
@@ -53,6 +66,7 @@ const WeatherContainer = () => {
 						<ForecastDataDisplay forecast={forecast} />
 					))}
 			</div>
+      <FavoritesDisplay favorites={favorites} handleFavorites={ handleFavorites} />
 		</div>
 	);
 };
