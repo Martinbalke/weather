@@ -1,4 +1,5 @@
 import React from 'react';
+import { Flex, Box, Text, Image } from '@chakra-ui/react'
 
 const LocationDataDisplay = ({ location: {
   name,
@@ -10,20 +11,29 @@ const LocationDataDisplay = ({ location: {
   text,
 } }) => {
 	return (
-		<div className='' style={{ display: 'flex' }}>
-			<div className='' style={{ margin: '1rem' }}>
-				<h3 style={{ margin: '1rem' }}>{name}</h3>
-				<h3 style={{ margin: '1rem' }}>{region}</h3>
-			</div>
+		<Flex w='50rem' bg='purple' color='white' p='4' borderRadius='4'>
+			<Box>
+				<Text fontSize='xl' fontWeight='bold'>
+					{name + ' ' + region}
+				</Text>
+				<Text
+					fontSize='lg'
+					fontWeight='bold'
+					color='whiteAlpha.700'
+				>{`As of ${new Date().toLocaleTimeString()}`}</Text>
 
-			<div className='' style={{ display: 'flex', flexDirection: 'column' }}>
-				<p>{time}</p>
-				<p>{temp}</p>
-				<p>{text}</p>
+				<Text fontSize='5xl' fontWeight='black'>
+					{temp + '°'}
+				</Text>
+				<Text fontSize='xl' fontWeight='black'>
+					{text}
+				</Text>
+			</Box>
 
-				<img src={icon} alt='Weather description icon' />
-			</div>
-		</div>
+			<Box>
+				<Image src={icon} alt='Weather description icon' />
+			</Box>
+		</Flex>
 	);
 };
 
