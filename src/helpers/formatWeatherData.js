@@ -5,7 +5,7 @@ export const formatWeatherData = (weatherData) => {
   return formattedWeatherData;
 }
 
-const formatLocationData = ({location, current}) => {
+const formatLocationData = ({ location, current }) => {
   const { name, region, country, localTime: time } = location
   const { temp_f: temp, condition: { icon, text} } = current
   return { name, region, country, time, temp, icon, text};

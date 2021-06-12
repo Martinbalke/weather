@@ -9,9 +9,17 @@ const LocationDataDisplay = ({ location: {
   temp,
   icon,
   text,
-} }) => {
+}, highLow }) => {
 	return (
-		<Flex w='50rem' bg='purple' color='white' p='4' borderRadius='4'>
+		<Flex
+			w='50rem'
+			bg='purple'
+			color='white'
+			p='4'
+			px='12'
+			borderRadius='4'
+			justifyContent='space-between'
+		>
 			<Box>
 				<Text fontSize='xl' fontWeight='bold'>
 					{name + ' ' + region}
@@ -30,9 +38,13 @@ const LocationDataDisplay = ({ location: {
 				</Text>
 			</Box>
 
-			<Box>
+			<Flex flexDirection='column' >
 				<Image src={icon} alt='Weather description icon' />
-			</Box>
+				<Text
+					fontSize='xl'
+					fontWeight='medium'
+				>{`${highLow.low} / ${highLow.high}`}</Text>
+			</Flex>
 		</Flex>
 	);
 };

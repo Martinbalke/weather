@@ -54,7 +54,7 @@ const WeatherContainer = () => {
 			/>
 			{weatherData.locationData && (
 				<div>
-          <LocationDataDisplay location={weatherData.locationData} />
+          <LocationDataDisplay location={weatherData.locationData} highLow={ weatherData.forecastData[0]}/>
           <input type="button" defaultValue='+' onClick={ () => handleFavorites('add',location ) }/>
 				</div>
 			)}
