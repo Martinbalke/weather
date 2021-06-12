@@ -38,12 +38,12 @@ const LocationDataDisplay = ({ location: {
 				</Text>
 			</Box>
 
-			<Flex flexDirection='column' >
+			<Flex flexDirection='column'>
 				<Image src={icon} alt='Weather description icon' />
 				<Text
 					fontSize='xl'
 					fontWeight='medium'
-				>{`${highLow.low} / ${highLow.high}`}</Text>
+				>{`${highLow.low}° / ${highLow.high}°`}</Text>
 			</Flex>
 		</Flex>
 	);
