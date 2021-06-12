@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import superagent from 'superagent';
 import { formatWeatherData } from '../helpers/formatWeatherData';
 import LocationDataDisplay from './LocationDataDisplay';
@@ -10,18 +10,6 @@ const WeatherContainer = () => {
 	const [weatherData, setWeatherData] = useState('');
 	const [location, setLocation] = useState('Seattle');
   const [favorites, setFavorites] = useState(window.localStorage.getItem('weatherFavorites') || []);
-  const inputRef = useRef(false);
-  
-  // useEffect(() => {
-  //   function handleClickOutside(e) {
-  //     if (e.target !== inputRef.current && weatherData.locationData.name) {
-  //       inputRef.current.value = weatherData.locationData.name;
-  //     }
-  //   }
-  //   window.addEventListener('click', handleClickOutside);
-    
-  //   return () => window.removeEventListener('click',handleClickOutside);
-	// });
 
 	useEffect(() => {
 		async function getWeatherData() {
