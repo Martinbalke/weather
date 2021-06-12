@@ -1,5 +1,6 @@
 import React, { useRef, useEffect} from 'react';
-import {Flex, Input, Button, Icon } from '@chakra-ui/react'
+import { Flex, Input, InputGroup, InputRightAddon } from '@chakra-ui/react'
+import {searchIcon } from '@chakra-ui/icons'
 
 const LocationSearchBar = ({ setLocation, weatherData }) => {
   const inputRef = useRef(false)
@@ -15,14 +16,17 @@ const LocationSearchBar = ({ setLocation, weatherData }) => {
     return () => window.removeEventListener('click',handleClickOutside);
   });
   return (
-    <Flex>
-      <input
-        type='text'
-        onKeyUp={(e) => setLocation(() => e.target.value)}
-        ref={inputRef}
-      />
-    </Flex>
-  );
+		<Flex>
+			<InputGroup>
+				<Input
+					placeholder='Search'
+					onKeyUp={(e) => setLocation(() => e.target.value)}
+					ref={inputRef}
+        />
+        <InputRightAddon children={ searchIcon }/>
+			</InputGroup>
+		</Flex>
+	);
 };
 
 export default LocationSearchBar;
