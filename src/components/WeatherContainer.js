@@ -9,7 +9,7 @@ import LocationSearchBar from './LocationSearchBar'
 const WeatherContainer = () => {
 	const [weatherData, setWeatherData] = useState('');
 	const [location, setLocation] = useState('Seattle');
-  const [favorites, setFavorites] = useState(window.localStorage.getItem('weatherFavorites') || []);
+
 
 	useEffect(() => {
 		async function getWeatherData() {
@@ -28,11 +28,11 @@ const WeatherContainer = () => {
 		getWeatherData();
 	}, [location]);
 
-  function handleFavorites(action, data) {
-    if (action === 'add') setFavorites(favorites => [data, ...favorites]) ;
-    if (action === 'remove') setFavorites(favorites => [...favorites].filter(favorite => favorite !== data))
-    window.localStorage.setItem('weatherFavorites', favorites);
-  }
+  // function handleFavorites(action, data) {
+  //   if (action === 'add') setFavorites(favorites => [data, ...favorites]) ;
+  //   if (action === 'remove') setFavorites(favorites => [...favorites].filter(favorite => favorite !== data))
+  //   window.localStorage.setItem('weatherFavorites', favorites);
+  // }
 
 	return (
     <div style={{ width: '50%' }}>
@@ -40,7 +40,6 @@ const WeatherContainer = () => {
 			{weatherData.locationData && (
 				<div>
           <LocationDataDisplay location={weatherData.locationData} highLow={ weatherData.forecastData[0]}/>
-          <input type="button" defaultValue='+' onClick={ () => handleFavorites('add',location ) }/>
 				</div>
 			)}
 			<div className='' style={{ display: 'flex' }}>
@@ -49,7 +48,7 @@ const WeatherContainer = () => {
 						<ForecastDataDisplay forecast={forecast} />
 					))}
 			</div>
-      <FavoritesDisplay favorites={favorites} handleFavorites={ handleFavorites} />
+			<FavoritesDisplay location={location}/>
 		</div>
 	);
 };

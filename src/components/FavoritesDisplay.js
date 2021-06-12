@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Flex, Text, IconButton } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon, Box } from '@chakra-ui/icons';
 
 
-const FavoritesDisplay = ({ favorites,  setFavorites, location }) => {
+const FavoritesDisplay = ({ location }) => {
+	  const [favorites, setFavorites] = useState(
+			window.localStorage.getItem('weatherFavorites') || []
+		);
 
 
 	function handleFavorites(action, data) {
