@@ -1,6 +1,6 @@
 import React, { useRef, useEffect} from 'react';
 import { Flex, Input, InputGroup, InputRightAddon } from '@chakra-ui/react'
-import {searchIcon } from '@chakra-ui/icons'
+import {SearchIcon } from '@chakra-ui/icons'
 
 const LocationSearchBar = ({ setLocation, weatherData }) => {
   const inputRef = useRef(false)
@@ -23,7 +23,7 @@ const LocationSearchBar = ({ setLocation, weatherData }) => {
 					onKeyUp={(e) => setLocation(() => e.target.value)}
 					ref={inputRef}
         />
-        <InputRightAddon children={ searchIcon }/>
+        <InputRightAddon children={ <SearchIcon/> }/>
 			</InputGroup>
 		</Flex>
 	);

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const FavoritesDisplay = ({ favorites, handleFavorites }) => {
-  console.log(favorites)
   return (
 		<div style={{ display: 'flex', flexDirection: 'column' }}>
 			{favorites &&

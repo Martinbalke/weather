@@ -4,6 +4,7 @@ import { formatWeatherData } from '../helpers/formatWeatherData';
 import LocationDataDisplay from './LocationDataDisplay';
 import ForecastDataDisplay from './ForecastDataDisplay';
 import FavoritesDisplay from './FavoritesDisplay'
+import LocationSearchBar from './LocationSearchBar'
 
 const WeatherContainer = () => {
 	const [weatherData, setWeatherData] = useState('');
@@ -11,16 +12,16 @@ const WeatherContainer = () => {
   const [favorites, setFavorites] = useState(window.localStorage.getItem('weatherFavorites') || []);
   const inputRef = useRef(false);
   
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (e.target !== inputRef.current && weatherData.locationData.name) {
-        inputRef.current.value = weatherData.locationData.name;
-      }
-    }
-    window.addEventListener('click', handleClickOutside);
+  // useEffect(() => {
+  //   function handleClickOutside(e) {
+  //     if (e.target !== inputRef.current && weatherData.locationData.name) {
+  //       inputRef.current.value = weatherData.locationData.name;
+  //     }
+  //   }
+  //   window.addEventListener('click', handleClickOutside);
     
-    return () => window.removeEventListener('click',handleClickOutside);
-	});
+  //   return () => window.removeEventListener('click',handleClickOutside);
+	// });
 
 	useEffect(() => {
 		async function getWeatherData() {
@@ -47,11 +48,7 @@ const WeatherContainer = () => {
 
 	return (
     <div style={{ width: '50%' }}>
-			<input
-				type='text'
-				onKeyUp={(e) => setLocation(() => e.target.value)}
-				ref={inputRef}
-			/>
+      <LocationSearchBar setLocation={setLocation} weatherData={weatherData }/>
 			{weatherData.locationData && (
 				<div>
           <LocationDataDisplay location={weatherData.locationData} highLow={ weatherData.forecastData[0]}/>
