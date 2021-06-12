@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
-import { Flex, Text, IconButton} from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Flex, Text, IconButton } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
-
 const FavoritesDisplay = ({ location }) => {
-	  const [favorites, setFavorites] = useState(
-			window.localStorage.getItem('weatherFavorites') || []
-		);
+	const [favorites, setFavorites] = useState(
+		JSON.parse(window.localStorage.getItem('weatherFavorites')) || []
+	);
+	
+	useEffect(() => {
+				window.localStorage.setItem(
+					'weatherFavorites',
+					JSON.stringify(favorites)
+				);
 
-
+	 }, [favorites])
 	function handleFavorites(action, data) {
 		if (action === 'add') {
 			if (favorites.includes(data)) return;
-			setFavorites(favorites => [data, ...favorites])
-		};
-			if (action === 'remove') setFavorites(favorites => [...favorites].filter(favorite => favorite !== data))
-			window.localStorage.setItem('weatherFavorites', favorites);
+			setFavorites((favorites) => [data, ...favorites]);
+		}
+		if (action === 'remove')
+			setFavorites((favorites) =>
+				[...favorites].filter((favorite) => favorite !== data)
+			);
 	}
 
 	return (
@@ -40,7 +47,12 @@ const FavoritesDisplay = ({ location }) => {
 				{favorites &&
 					favorites.map((favorite) => (
 						<Flex alignItems='center'>
-							<Text fontSize='l' fontWeight='semibold' m='2' key={favorite + 'he'}>
+							<Text
+								fontSize='l'
+								fontWeight='semibold'
+								m='2'
+								key={favorite + 'he'}
+							>
 								{favorite}
 							</Text>
 							<IconButton
