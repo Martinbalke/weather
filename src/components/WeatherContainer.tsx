@@ -1,14 +1,14 @@
 import React, { useState, useEffect} from 'react';
 import superagent from 'superagent';
-import { formatWeatherData } from '../helpers/formatWeatherData';
+import { FormattedWeatherData, formatWeatherData } from '../helpers/formatWeatherData';
 import LocationDataDisplay from './LocationDataDisplay';
 import ForecastDataDisplay from './ForecastDataDisplay';
 import FavoritesDisplay from './FavoritesDisplay'
 import LocationSearchBar from './LocationSearchBar'
 
 const WeatherContainer = () => {
-	const [weatherData, setWeatherData] = useState('');
-	const [location, setLocation] = useState('Seattle');
+	const [weatherData, setWeatherData] = useState<FormattedWeatherData>({}) ;
+	const [location, setLocation] = useState<string>('Seattle');
 
 
 	useEffect(() => {
@@ -19,8 +19,8 @@ const WeatherContainer = () => {
 						`http://api.weatherapi.com/v1/forecast.json?key=763268107e8e427abe0160826210206&q=${location}&days=7&aqi=no&alerts=no`
 					)
 				if (data.status === 200) {
-					data = formatWeatherData(data.body);
-					setWeatherData(data);
+					const formattedData : FormattedWeatherData = formatWeatherData(data.body);
+					setWeatherData(formattedData);
 				}
 			} catch (error) {}
 		}
@@ -32,10 +32,11 @@ const WeatherContainer = () => {
 	return (
 		<div style={{ width: '50%' }}>
 		
-      <LocationSearchBar setLocation={(data) => setLocation(data)} weatherData={weatherData }/>
-			{weatherData.locationData && (
+			<LocationSearchBar setLocation={(data : string) => setLocation(data)} weatherData={weatherData }/>
+			{weatherData.locationData &&
+				(
 				<div>
-          <LocationDataDisplay location={weatherData.locationData} highLow={ weatherData.forecastData[0]}/>
+          <LocationDataDisplay location={weatherData.locationData} highLow={ weatherData.forecastData}/>
 				</div>
 			)}
 			<div className='' style={{ display: 'flex' }}>

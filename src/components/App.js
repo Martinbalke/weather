@@ -1,4 +1,4 @@
-import WeatherContainer from './WeatherContainer'
+import WeatherContainer from './WeatherContainer.tsx'
 import { ChakraProvider } from '@chakra-ui/react';
  
 function App() {

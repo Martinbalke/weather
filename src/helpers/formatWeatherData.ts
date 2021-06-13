@@ -1,5 +1,5 @@
 
-interface WeatherData {
+export interface WeatherData {
   current: object,
 	location: object,
 	forecast: object,
@@ -24,8 +24,8 @@ interface ForecastData {
 };
 
 export interface FormattedWeatherData {
-  locationData: LocationData
-  forecastData: [ForecastData]
+  locationData?: LocationData
+  forecastData?: [ForecastData]
 }
 
 export const formatWeatherData = (weatherData: WeatherData) => {
@@ -42,9 +42,9 @@ const formatLocationData = ({ location, current } : WeatherData) => {
 }
 
 const formatForcastData = ({ forecast } : WeatherData) => {
-  const formattedForcastData = [] ;
+  const formattedForcastData : any = [] ;
   const { forecastday } : any = forecast;
-  forecastday.forEach(dayData => {
+  forecastday.forEach((dayData: any )=> {
     formattedForcastData.push({
 			date: dayData.date,
 			high: dayData.day.maxtemp_f,
