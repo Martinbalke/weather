@@ -1,15 +1,28 @@
 import React from 'react';
+import {Flex, Text, Image} from '@chakra-ui/react'
 
 const ForecastDataDisplay = ({ forecast: { date, high, low, text, icon } }) => {
   return (
-    <div key={date } style={{ display: 'flex', flexDirection: 'column', margin:'1rem'} }>
-      <p>{date }</p>
-      <p>{`High: ` + high }</p>
-      <p>{`Low: ` + low }</p>
-      <p>{text }</p>
-      <img src={icon} style={{width:'50px'}} alt='icon display of the current weather'/>
-    </div>
-  );
+		<Flex key={date} flexDirection='column' m='4'>
+			<Text fontSize='m' fontWeight='medium'>
+				{date}
+			</Text>
+			<Text fontSize='m' fontWeight='medium'>
+				{`High: ` + high}
+			</Text>
+			<Text fontSize='m' fontWeight='medium'>
+				{`Low: ` + low}
+			</Text>
+			<Text fontSize='m' fontWeight='medium'>
+				{text}
+			</Text>
+			<Image
+				src={icon}
+				style={{ width: '50px' }}
+				alt='icon display of the current weather'
+			/>
+		</Flex>
+	);
 };
 
 export default ForecastDataDisplay;
