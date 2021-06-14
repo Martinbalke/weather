@@ -4,12 +4,14 @@ import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
 interface Props {
 	location: string
+	setLocation: Function,
  }
 
-const FavoritesDisplay = (({ location }: Props) => {
+const FavoritesDisplay = (({ location, setLocation }: Props) => {
 	const [favorites, setFavorites] = useState(
 		JSON.parse(window.localStorage.getItem('weatherFavorites') || '[]')
 	);
+
 	
 	useEffect(() => {
 		window.localStorage.setItem(
@@ -50,7 +52,7 @@ const FavoritesDisplay = (({ location }: Props) => {
 				</Text>
 				{favorites &&
 					favorites.map((favorite: string) => (
-						<Flex alignItems='center'>
+						<Flex alignItems='center' key={favorite}>
 							<Text
 								fontSize='l'
 								fontWeight='semibold'
@@ -61,8 +63,16 @@ const FavoritesDisplay = (({ location }: Props) => {
 							</Text>
 							<IconButton
 								icon={<DeleteIcon />}
+								m='2'
 								aria-label='Remove a location from fravorites'
 								onClick={(e) => handleFavorites('remove', favorite)}
+							/>
+							<IconButton
+								icon={<AddIcon />}
+								m='2'
+								id={`${favorite}`}
+								aria-label='Remove a location from fravorites'
+								onClick={() => setLocation(favorite)}
 							/>
 						</Flex>
 					))}

@@ -24,7 +24,6 @@ const WeatherContainer = () => {
 				}
 			} catch (error) {}
 		}
-
 		getWeatherData();
 	}, [location]);
 
@@ -50,7 +49,7 @@ const WeatherContainer = () => {
 						<ForecastDataDisplay forecast={forecast} />
 					))}
 			</div>
-			<FavoritesDisplay location={location} />
+			<FavoritesDisplay location={location} setLocation={setLocation}/>
 		</div>
 	);
 };
