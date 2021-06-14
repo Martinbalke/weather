@@ -1,15 +1,22 @@
 import React from 'react';
 import { Flex, Box, Text, Image } from '@chakra-ui/react'
+import { ForecastData,LocationData} from '../helpers/formatWeatherData';
 
-const LocationDataDisplay = ({ location: {
-  name,
-  region,
-  country,
-  time,
-  temp,
-  icon,
-  text,
-}, highLow }) => {
+interface Props {
+	location: LocationData,
+	forecastData: [ForecastData],
+}
+
+const LocationDataDisplay = ({
+	location: {
+		name,
+		region,
+		country,
+		time,
+		temp,
+		icon,
+		text,
+	}, forecastData } : Props) => {
 	return (
 		<Flex
 			w='50rem'
@@ -43,7 +50,7 @@ const LocationDataDisplay = ({ location: {
 				<Text
 					fontSize='xl'
 					fontWeight='medium'
-				>{`${highLow.low}° / ${highLow.high}°`}</Text>
+				>{`${forecastData[0].low}° / ${forecastData[0].high}°`}</Text>
 			</Flex>
 		</Flex>
 	);

@@ -5,7 +5,7 @@ export interface WeatherData {
 	forecast: object,
 }
 
-interface LocationData {
+export interface LocationData {
   name: string,
   region: string,
   country: string,
@@ -15,7 +15,7 @@ interface LocationData {
   text: string
 }
 
-interface ForecastData {
+export interface ForecastData {
   date: Date,
   high: string,
   low: string,

@@ -31,21 +31,26 @@ const WeatherContainer = () => {
 
 	return (
 		<div style={{ width: '50%' }}>
-		
-			<LocationSearchBar setLocation={(data : string) => setLocation(data)} weatherData={weatherData }/>
+			<LocationSearchBar
+				setLocation={(data: string) => setLocation(data)}
+				weatherData={weatherData}
+			/>
 			{weatherData.locationData &&
-				(
-				<div>
-          <LocationDataDisplay location={weatherData.locationData} highLow={ weatherData.forecastData}/>
-				</div>
-			)}
+				weatherData.forecastData && (
+					<div>
+						<LocationDataDisplay
+							location={weatherData.locationData}
+							forecastData={weatherData.forecastData}
+						/>
+					</div>
+				)}
 			<div className='' style={{ display: 'flex' }}>
 				{weatherData.forecastData &&
 					weatherData.forecastData.map((forecast) => (
 						<ForecastDataDisplay forecast={forecast} />
 					))}
 			</div>
-			<FavoritesDisplay location={location}/>
+			<FavoritesDisplay location={location} />
 		</div>
 	);
 };
