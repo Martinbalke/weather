@@ -14,12 +14,10 @@ const LocationSearchBar = ({ setLocation, weatherData }: Props) => {
 	function handleClickOutside(e: Event) {
 		if (
 			e.target !== inputRef.current &&
-			weatherData.locationData?.name &&
-			!(e.target as HTMLElement).id
+			weatherData.locationData?.name
 		) {
-			console.log((e.target as HTMLElement).id);
 			inputRef.current!.value = weatherData.locationData?.name;
-			setLocation(() => inputRef.current!.value);
+			setLocation(inputRef.current!.value);
 		}
 	}
 
