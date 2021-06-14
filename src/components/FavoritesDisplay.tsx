@@ -2,25 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { Flex, Text, IconButton } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
-const FavoritesDisplay = ({ location }) => {
+interface Props {
+	location: string
+ }
+
+const FavoritesDisplay = (({ location }: Props) => {
 	const [favorites, setFavorites] = useState(
-		JSON.parse(window.localStorage.getItem('weatherFavorites')) || []
+		JSON.parse(window.localStorage.getItem('weatherFavorites') || '[]')
 	);
 	
 	useEffect(() => {
-				window.localStorage.setItem(
-					'weatherFavorites',
-					JSON.stringify(favorites)
-				);
+		window.localStorage.setItem(
+			'weatherFavorites',
+			JSON.stringify(favorites)
+		);
 
-	 }, [favorites])
-	function handleFavorites(action, data) {
+	}, [favorites])
+	function handleFavorites(action: string, data: string) {
 		if (action === 'add') {
 			if (favorites.includes(data)) return;
-			setFavorites((favorites) => [data, ...favorites]);
+			setFavorites((favorites: Array<string>) => [data, ...favorites]);
 		}
 		if (action === 'remove')
-			setFavorites((favorites) =>
+			setFavorites((favorites: Array<string>) =>
 				[...favorites].filter((favorite) => favorite !== data)
 			);
 	}
@@ -45,7 +49,7 @@ const FavoritesDisplay = ({ location }) => {
 					Favorites
 				</Text>
 				{favorites &&
-					favorites.map((favorite) => (
+					favorites.map((favorite: string) => (
 						<Flex alignItems='center'>
 							<Text
 								fontSize='l'
@@ -65,6 +69,6 @@ const FavoritesDisplay = ({ location }) => {
 			</Flex>
 		</Flex>
 	);
-};
+});
 
 export default FavoritesDisplay;
