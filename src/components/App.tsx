@@ -1,8 +1,9 @@
-import WeatherContainer from './WeatherContainer'
+// @ts-ignore
+import WeatherContainer from './WeatherContainer.tsx';
 import { ChakraProvider } from '@chakra-ui/react';
- 
+
 function App() {
-  return (
+	return (
 		<ChakraProvider>
 			<div className='App'>
 				<WeatherContainer />

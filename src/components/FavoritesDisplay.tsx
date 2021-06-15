@@ -2,25 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Flex, Text, IconButton } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
-const FavoritesDisplay = ({ location }) => {
+interface Props {
+	location: string
+	setLocation: Function,
+ }
+
+const FavoritesDisplay = (({ location, setLocation }: Props) => {
 	const [favorites, setFavorites] = useState(
-		JSON.parse(window.localStorage.getItem('weatherFavorites')) || []
+		JSON.parse(window.localStorage.getItem('weatherFavorites') || '[]')
 	);
+
 	
 	useEffect(() => {
-				window.localStorage.setItem(
-					'weatherFavorites',
-					JSON.stringify(favorites)
-				);
+		window.localStorage.setItem(
+			'weatherFavorites',
+			JSON.stringify(favorites)
+		);
 
-	 }, [favorites])
-	function handleFavorites(action, data) {
+	}, [favorites])
+	function handleFavorites(action: string, data: string) {
 		if (action === 'add') {
 			if (favorites.includes(data)) return;
-			setFavorites((favorites) => [data, ...favorites]);
+			setFavorites((favorites: Array<string>) => [data, ...favorites]);
 		}
 		if (action === 'remove')
-			setFavorites((favorites) =>
+			setFavorites((favorites: Array<string>) =>
 				[...favorites].filter((favorite) => favorite !== data)
 			);
 	}
@@ -45,8 +51,8 @@ const FavoritesDisplay = ({ location }) => {
 					Favorites
 				</Text>
 				{favorites &&
-					favorites.map((favorite) => (
-						<Flex alignItems='center'>
+					favorites.map((favorite: string) => (
+						<Flex alignItems='center' key={favorite}>
 							<Text
 								fontSize='l'
 								fontWeight='semibold'
@@ -57,14 +63,22 @@ const FavoritesDisplay = ({ location }) => {
 							</Text>
 							<IconButton
 								icon={<DeleteIcon />}
+								m='2'
 								aria-label='Remove a location from fravorites'
 								onClick={(e) => handleFavorites('remove', favorite)}
+							/>
+							<IconButton
+								icon={<AddIcon />}
+								m='2'
+								id={`${favorite}`}
+								aria-label='Remove a location from fravorites'
+								onClick={() => setLocation(favorite)}
 							/>
 						</Flex>
 					))}
 			</Flex>
 		</Flex>
 	);
-};
+});
 
 export default FavoritesDisplay;

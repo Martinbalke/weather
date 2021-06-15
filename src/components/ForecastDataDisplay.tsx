@@ -1,9 +1,14 @@
 import React from 'react';
-import {Flex, Text, Image} from '@chakra-ui/react'
+import { Flex, Text, Image } from '@chakra-ui/react'
+import { ForecastData } from '../helpers/formatWeatherData';
 
-const ForecastDataDisplay = ({ forecast: { date, high, low, text, icon } }) => {
+interface Props {
+	forecast: ForecastData
+}
+
+const ForecastDataDisplay = ({ forecast: { date, high, low, text, icon } }: Props) => {
   return (
-		<Flex key={date} flexDirection='column' m='4'>
+		<Flex key={`${high + low}`} flexDirection='column' m='4'>
 			<Text fontSize='m' fontWeight='medium'>
 				{date}
 			</Text>
